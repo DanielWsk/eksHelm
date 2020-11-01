@@ -12,6 +12,14 @@ module "vpc"{
     environment = var.environment
 }
 
+module "eks"{
+    source = "./modules/eks"
+
+    subnet1id = module.vpc.subnet1id
+    subnet2id = module.vpc.subnet2id
+    environment = var.environment
+}
+
 terraform {
   backend "s3" {
     bucket = "dw-terraform-backend"
