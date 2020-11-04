@@ -17,6 +17,22 @@ resource "aws_internet_gateway" "igw1" {
   }
 }
 
+resource "aws_eip" "elasticip" {
+  depends_on = [aws_internet_gateway.igw1]
+}
+
+resource "aws_nat_gateway" "natgw" {
+  allocation_id = aws_eip.elasticip.id
+  subnet_id     = aws_subnet.publicsubnet[0].id
+
+  depends_on    = [aws_internet_gateway.igw1]
+
+  tags = {
+    Name = "natgw"
+    Environment = var.environment
+  }
+}
+
 resource "aws_subnet" "publicsubnet" {
   count              = length(var.pubsubnetcidrs)
 
@@ -61,11 +77,17 @@ resource "aws_subnet" "privatesubnet" {
   tags = {
     Name = "private-subnet ${count.index+1}"
     Environment = var.environment
+    "kubernetes.io/cluster/eksCluster" = "shared"
   }
 }
 
 resource "aws_route_table" "privroute" {
   vpc_id = aws_vpc.tf-vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.natgw.id
+  }
 
   tags = {
     Name = "privroute"
