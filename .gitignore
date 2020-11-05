@@ -4,3 +4,4 @@ selections.json
 C:\Users\Daniel\Github\eksHelm\.terraform\plugins\registry.terraform.io\hashicorp\aws\3.13.0\windows_amd64\terraform-provider-aws_v3.13.0_x5.exe
 .terraform\plugins\registry.terraform.io
 .terraform\plugins\registry.terraform.io\hashicorp\aws\3.13.0\windows_amd64\terraform-provider-aws_v3.13.0_x5.exe
+*.exe
