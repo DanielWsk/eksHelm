@@ -1,24 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
-    app: my-nginx
-  name: my-nginx
+    app: {{ .Values.app_label }}
+  name: {{ .Values.deployment_name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: my-nginx
+      app: {{ .Values.app_label }}
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: my-nginx
+        app: {{ .Values.app_label }}
     spec:
       containers:
-      - image: nginx
-        name: nginx
+      - image: {{ .Values.image }}
+        name: {{ .Values.image_name }}
         resources: {}
 status: {}
