@@ -47,9 +47,9 @@ resource "aws_eks_node_group" "nodeGroup" {
   node_role_arn   = aws_iam_role.nodeRole.arn
   subnet_ids      = [var.subnet1id, var.subnet2id]
   scaling_config {
-    desired_size = 2
-    max_size     = 3
-    min_size     = 1
+    desired_size = var.desired_size
+    max_size     = var.max_size
+    min_size     = var.min_size
   }
 
   depends_on = [

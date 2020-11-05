@@ -18,6 +18,9 @@ module "eks"{
     subnet1id = module.vpc.subnet1id
     subnet2id = module.vpc.subnet2id
     environment = var.environment
+    desired_size = var.desired_size
+    max_size = var.max_size
+    min_size = var.min_size
 }
 
 terraform {
@@ -39,3 +42,6 @@ variable "privsubnetcidrs"{
 variable "azs"{
   type        = list(string)
 }
+variable "desired_size"{}   
+variable "max_size"{}       
+variable "min_size"{}       
