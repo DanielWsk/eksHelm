@@ -1,11 +1,18 @@
-replicaCount: 3
-service:
-  type: LoadBalancer
+#Values to be passed into the deployment.yaml and service.yaml files
+
+app_label: my_nginx
+
+deployment_name: nginx-deployment
+
+replicaSet: 3
+
 image : nginx
 image_name: nginx
-app_label: my_nginx
-deployment_name: nginx-deployment
+
 service_name: nginx-service
+
+service:
+  type: LoadBalancer
 port: 80
 targetPort: 80
 nodePort: 30010
