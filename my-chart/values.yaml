@@ -13,6 +13,9 @@ service_name: nginx-service
 
 service:
   type: LoadBalancer
+#Port for the ClusterIP Service
 port: 80
+#Port for the pods
 targetPort: 80
+#Port for the node to connect to the external service
 nodePort: 30010
